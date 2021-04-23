@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLIDER</title>
+    <style>
+        *{
+            margin: 0;
+            
+            box-sizing:border-box;
+        }
+
+        .Container-Slider{
+            width:100%;
+            height:500px;
+            background:skyblue;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            margin:0 auto;
+            flex-direction:column;
+            position:relative;
+            top:70px;
+
+        }
+        .slider{
+            width:80%;
+            height:400px;
+            background:orange;
+            overflow:hidden;
+        }
+        .marcadores{
+            display:flex;
+            margin:10px;
+        }
+        .marcadores .circle{
+            padding:10px;
+            border-radius:50%;
+            background:whitesmoke;
+            margin:10px;
+            cursor: pointer;
+        }
+        .marcadores #circle1:hover{
+            background:darkcyan;
+            transition: all .0.5s ease-in-out ;
+            
+        }
+        .item1{
+            width:100%;
+            height:100%;
+            background:purple;
+        }
+        .item2{
+            width:100%;
+            height:100%;
+            background:red;
+        }
+        .item3{
+            width:100%;
+            height:100%;
+            background:blue;
+        }
+        .item4{
+            width:100%;
+            height:100%;
+            background:orange;
+        }
+
+        .inputs input{
+            height:30px;
+            margin-bottom:15px;
+        }
+        #registrar-producto{
+            background:slateblue;
+            padding:10px 25px;
+            border:none;
+            margin-bottom:10px;
+            color:white;
+            font-weight:bold;
+            cursor:pointer;
+        }
+        #registrar-producto:hover{
+            background:sienna;
+        }
+        .header{
+            width:100%;
+            height:70px;
+            background:steelblue;
+            position:fixed;
+            z-index:10000;
+            transition:all 0.5s;
+        }
+        .header nav{
+            width:100%;
+            height:70px;
+            background:orange;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+        }
+        .header nav a{
+            color: white;
+            font-family:Arial, Helvetica, sans-serif;
+            font-size:20px;
+            margin:10px;
+            text-decoration:none;
+            background: chocolate;
+            padding:10px;
+            border-radius:15px;
+        }
+    </style>
+</head>
+<body onload="cambiarimagen();">
+    <header class="header" id="header">
+        <nav>
+            <a href="">Inicio</a>
+            <a href="">Servicios</a>
+            <a href="">Categorias</a>
+            <a href="">Nosotros</a>
+            <a href="">Contacto</a>
+        </nav>
+    </header>
+    <div class="Container-Slider">
+        <div class="slider">
+        <img src="img/01.png" id="imagen" alt="" width="100%" height="100%">
+        </div>
+        <div class="marcadores">
+            <div class="circle" id="circle1"></div>
+            <div class="circle" id="circle2"></div>
+            <div class="circle" id="circle3"></div>
+        </div>
+    </div>
+
+    <div class="COMPRAR" style="width:100%;height:auto;padding:50px;background: whitesmoke;display:flex;flex-direction: column;justify-content:center;align-items: center;">
+        <p style="font-weight:bold;font-family: Arial, Helvetica, sans-serif;">SELECCION DE PRODUCTOS Y MOSTRAR RESULTADO EN TABLA</p>
+        <br>
+        <select name="" id="categorias" style="width:40%;height:50px;" onchange="seleccion();">
+            <option value="a" selected disabled>--SELECCIONA--</option>
+            <option value="b">TECNOLOGIA</option>
+            <option value="c">ELECTRODOMESTICOS</option>
+            <option value="d">ABARROTES</option>
+        </select>
+        <br>
+        <table border="1" style="background:white;font-family:Arial, Helvetica, sans-serif;width:500px;text-align:center;">
+            <tr>
+                <td style="font-weight:bold;">CODIGO</td>
+                <td style="font-weight:bold;">DESCRIPCION</td>
+                <td style="font-weight:bold;" >CANTIDAD</td>
+            </td>
+            <tr>
+                <td id="codigo">Seleccione</td>
+                <td id="seleccionado-option">Seleccione</td>
+                <td id="seleccionado-precio">Seleccione</td>
+            </td>
+            <tr>
+                <td style="font-weight:bold;">COLOR</td>
+                <td style="font-weight:bold;">MARCA</td>
+                <td style="font-weight:bold;" >GENERO</td>
+            </td>
+        </table>
+        <br>
+        <br>
+        <br>
+        <p style="font-family:arial;font-weight:bold;">REGISTRO DE PRODUCTOS EN TABLAS</p>
+        <br>
+        <br>
+        <div class="inputs">
+            <input type="text" placeholder="CODIGO" id="codpro">
+            <input type="text" placeholder="NOMBRE PRODUCTP" id="nompro">
+            <input type="text" placeholder="STOCK" id="stockpro">
+            <input type="text" placeholder="PRECUI" id="prepro">
+        </div>
+        <button id="registrar-producto" onclick="registrarProducto();">REGISTRAR PRODUCTO</button>
+        <table border="1" id="tabla-registro" style="background:white;width: 500px;height:auto;text-align:center;font-family:Arial, Helvetica, sans-serif;font-weight:bold;">
+            <tr>
+                <td>CODIGO</td>
+                <td>NOMBRE</td>
+                <td>STOCK</td>
+                <td>PRECIO VENTA</td>
+                <td>TOTA VENTA</td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p style="font-weight: bold;font-family:Arial, Helvetica, sans-serif;">SELECCION DE PRODUCTO E INSERCION DE CODIGO DE PROMOCION- TRUE - FALSE</p>
+        <select name="" id="productos" style="width:250px;height:50px;margin:15px;" onchange="mostrarprecio();">
+            <option value="x" disabled selected>--SELECCIONA PRODUCTO--</option>
+            <option value="c">CELULAR LG</option>
+            <option value="l">LAVADORA MIRAY</option>
+            <option value="t">TELEVISOR LG</option>
+        </select>
+        <input type="text" placeholder="PRECIO PRODUCTO" id="precio" style="width:250px;height:20;margin:5px;height:50px;" disabled>
+        <input type="text" placeholder="Ingresa Cantidad" id="cantidad" style="width:250px;height:20;margin:5px;height:50px;font-size:20px;padding:0px 0px 0px 20px;">
+        <button id="btn_vale" style="color:blue;background:none;border:none;cursor: pointer;" onclick="valedescuento();">INGRESA VALE</button>
+        <input type="text" placeholder="VALE DE DECUENTO" id="vale" style="width:250px;height:10;margin:5px;font-size:15px;padding:0px 0px 0px 20px;text-align:center;" disabled>
+        <input type="button" onclick="procesarCompra();" value="PROCESAR COMPRA" style="margin:15px;background:springgreen;color:black;font-family:Arial, Helvetica, sans-serif;padding:10px 20px;border:none;cursor: pointer;">
+        <br>
+        <br>
+        <table border="1" id="tabla_venta" style="background:white; font-family:Arial, Helvetica, sans-serif;font-size:15;font-weight:bold;">
+            <tr>
+                <td>PRODUCTO</td>
+                <td>CANTIDAD</td>
+                <td>VALE DESCUENTO</td>
+                <td>PRECIO TOTAL</td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script src="index.js"></script>
+</html>
